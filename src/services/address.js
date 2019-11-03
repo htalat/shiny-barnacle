@@ -58,7 +58,7 @@ async function remove(id){
 
         let q = { _id: id };
 
-        await Address.deleteOne(q);
+        await Model.deleteOne(q);
 
         return true;
         
@@ -79,7 +79,7 @@ async function fetch(all, country, state){
 
     try {
 
-        let addresses = await Address.find(query);
+        let addresses = await Model.find(query);
 
         return addresses;
 
@@ -88,8 +88,10 @@ async function fetch(all, country, state){
     }
 }
 
-exports.create = create;
-exports.get = get;
-exports.update = update;
-exports.remove = remove;
-exports.fetch = fetch;
+module.exports = {
+    create,
+    get,
+    update,
+    remove,
+    fetch
+}

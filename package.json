@@ -2,10 +2,10 @@
   "name": "challenge",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "export NODE_ENV=test; mocha --timeout 5000  --exit --recursive test"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +20,10 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
     "mocha": "^6.2.2",
+    "nock": "^11.7.0",
+    "nyc": "^14.1.1",
     "supertest": "^4.0.2"
   }
 }

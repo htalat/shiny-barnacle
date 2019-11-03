@@ -4,7 +4,8 @@ async function setup(){
 
     let opts = {
         useNewUrlParser: true, 
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }
     
     mongoose.Promise = global.Promise;
@@ -13,7 +14,9 @@ async function setup(){
         
         await mongoose.connect(process.env.MONGO_CONNECTION, opts)
 
-        console.log('connected to mongoose');
+        if(process.env.NODE_ENV !== 'test'){
+            console.log('connected to mongoose');
+        }
 
         const db = mongoose.connection;
         db.on('error', err => console.error('MongoDB connection error:', err));
