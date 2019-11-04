@@ -23,7 +23,7 @@ async function get(id){
         let query = {_id: id};
 
         let doc = await Model.findOne(query).lean();
-
+console.log(id, doc)
         return doc;
 
     } catch (error) {
@@ -41,13 +41,18 @@ async function update(id, toUpdate){
                 ...toUpdate
             }
         }
+        let opt = {
+            new: true
+        }
     
-        let updatedDoc = await Model.updateOne(q, u);    
-        
-        return updatedDoc;
+        let updatedDoc = await Model.updateOne(q, u, opt);    
+
+        let { nModified } = updatedDoc;
+
+        return nModified === 1;
         
     } catch (error) {
-        return null;
+        return false;
     }
 
 }

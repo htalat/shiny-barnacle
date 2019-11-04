@@ -188,7 +188,24 @@ describe('Address API test', () =>{
             expect(message).to.equal('Found Address');
             expect(address.name).to.equal(obj.name);
         })
+
+        
+        it('should not update an addresses - bad id', async () =>{
+
+            let obj = {
+                name: "WORK"
+            }
     
+            let res = await request(app)
+            .put(`/address/5dbee9e382f644515a7e047c`)
+            .send(obj)
+            .expect(404);
+    
+            let { status, message } = res.body;
+            expect(status).equal(false);
+            expect(message).to.equal('Not found');
+        })
+
         it('should not update an addresses - invalid country / state', async () =>{
     
             chai.spy.on(helper, 'isStateValid', returns => false);

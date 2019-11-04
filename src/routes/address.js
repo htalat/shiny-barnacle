@@ -118,6 +118,18 @@ router.put('/:id', async(req, res) =>{
 
         let { id } = req.params;
 
+        let foundAddress = await AddressService.get(id);
+
+        if(foundAddress === null){
+
+            let response = {
+                status: false, 
+                message: 'Not found',
+            }
+            
+            return res.status(404).json(response);
+        }
+
         let keysToCheck = ['country', 'state'];
 
         let n = Object.keys(req.body).filter(k => keysToCheck.includes(k)).length;
@@ -156,8 +168,7 @@ router.put('/:id', async(req, res) =>{
 
         let response = {
             status: true, 
-            message: 'Updated Address', 
-            data: { address: updatedAddress }
+            message: 'Updated Address'
         }
         
         return res.status(200).json(response);
